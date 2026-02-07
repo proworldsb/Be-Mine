@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  font-family:Arial, sans-serif;
+
+  /* NEW BACKGROUND IMAGE */
+  background:url("https://i.ibb.co/N2xPzWwg/job297-ploy-17c-pink-01.jpg");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+}
+
+h1{
+  color:white;
+  text-shadow:0 0 15px rgba(0,0,0,0.5);
+  text-align:center;
+}
+
+button{
+  padding:16px 26px;
+  font-size:18px;
+  margin:10px;
+  border:none;
+  border-radius:14px;
+  cursor:pointer;
+  transition:0.3s;
+  font-weight:bold;
+}
+
+/* YES button */
+#yesBtn{
+  background:linear-gradient(45deg,#ff416c,#ff4b2b);
+  color:white;
+  box-shadow:0 0 20px rgba(255,0,90,0.6);
+  animation:pulse 1.5s infinite;
+}
+
+#yesBtn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 30px rgba(255,0,90,1);
+}
+
+@keyframes pulse{
+  0%{box-shadow:0 0 10px rgba(255,0,90,0.6);}
+  50%{box-shadow:0 0 25px rgba(255,0,90,1);}
+  100%{box-shadow:0 0 10px rgba(255,0,90,0.6);}
+}
+
+/* NO button */
+#noBtn{
+  position:absolute;
+  background:linear-gradient(45deg,#6a11cb,#2575fc);
+  color:white;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+}
+
+#noBtn:hover{
+  transform:rotate(-5deg) scale(1.05);
+}
+
+/* Floating hearts */
+.heart{
+  position:absolute;
+  bottom:-20px;
+  animation:float 6s linear infinite;
+  opacity:0.9;
+}
+
+@keyframes float{
+  from{ transform:translateY(0) rotate(0deg);}
+  to{ transform:translateY(-110vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">Will you be my Mine? ❤️</h1>
+
+<button id="yesBtn">Yes 😍</button>
+<button id="noBtn">No 😢</button>
+
+<script>
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const title = document.getElementById("title");
+
+let yesSize = 18;
+
+const noTexts = [
+"Are you sure? 😭",
+"Katlego yohhh😭",
+"Really sure??",
+"Think again 👀",
+"Ungiphula inhliziyo 😪",
+"That hurts 💔",
+"I'll ask nicely again 🥺",
+"I promise you won't regret it",
+"You didn't mean that 😭",
+"Try again 😂",
+"😉 Click the other button see if it works",
+"Be serious now 😅",
+"Last chance...",
+"You making this hard 😩",
+"Ngiyaku....",
+"Why though 😭",
+"Don't do me like this 😢",
+"I brought snacks 🍫",
+"I lift yamahala yona?",
+"Okay wow 😳",
+"Still no??",
+"Wrong button 👀",
+"Maybe your finger slipped 😅",
+"I believe in you 😂",
+"One more chance please 🥺",
+"You breaking my code 😂",
+"This button tired 😭",
+"You sure sure??",
+"I can wait 😌",
+"Final answer?? 💘",
+"Yohhh 30 tries and still no! 😭😢"
+];
+
+let textIndex = 0;
+
+/* YES CLICK */
+yesBtn.onclick = () => {
+  title.innerHTML = "Yay!!! ❤️✨";
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
+};
+
+/* NO CLICK */
+noBtn.onclick = () => {
+
+  yesSize += 3;
+  yesBtn.style.fontSize = yesSize + "px";
+
+  if(textIndex < noTexts.length){
+    noBtn.innerText = noTexts[textIndex];
+    textIndex++;
+  }
+
+  const colors = [
+    "linear-gradient(45deg,#6a11cb,#2575fc)",
+    "linear-gradient(45deg,#ff9966,#ff5e62)",
+    "linear-gradient(45deg,#00c6ff,#0072ff)",
+    "linear-gradient(45deg,#f7971e,#ffd200)",
+    "linear-gradient(45deg,#ee0979,#ff6a00)"
+  ];
+  noBtn.style.background = colors[Math.floor(Math.random()*colors.length)];
+
+  const x = Math.random() * (window.innerWidth - 120);
+  const y = Math.random() * (window.innerHeight - 60);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+};
+
+/* Floating hearts */
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = ["❤️","💖","💘","💕"][Math.floor(Math.random()*4)];
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (15 + Math.random()*25) + "px";
+  heart.style.animationDuration = (4 + Math.random()*4) + "s";
+  document.body.appendChild(heart);
+
+  setTimeout(()=>heart.remove(),6000);
+}
+
+setInterval(createHeart,300);
+</script>
+
+</body>
+</html>
